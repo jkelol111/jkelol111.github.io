@@ -1,5 +1,5 @@
 class ClassicWM {
-	constructor () {
+  constructor () {
     this.focused = {}
     this.minimized = {}
   }
