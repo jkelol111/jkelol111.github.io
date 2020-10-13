@@ -17,6 +17,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
         <br><br>
         If you insist, tap the button to get to my GitHub.
       </div>
+      <hr>
       <button id="github-mobile-button" class="command_button">Go to GitHub</button>
       <button id="close-button" class="command_button">Close window</button>`
   })
