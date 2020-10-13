@@ -17,11 +17,15 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
         <br><br>
         If you insist, tap the button to get to my GitHub.
       </div>
-      <button id="close-button" class="command_button">Go to GitHub</button>`
+      <button id="github-mobile-button" class="command_button">Go to GitHub</button>
+      <button id="close-button" class="command_button">Close window</button>`
   })
 
-  $('#close-button').click(function () {
+  $('#github-mobile-button').click(function () {
     window.open('https://github.com/jkelol111')
+  })
+  $('#close-button').click(function () {
+    window.close()
   })
 } else {
   const windowLayouts = {
