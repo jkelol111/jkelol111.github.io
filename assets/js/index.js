@@ -10,16 +10,18 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
       <div class="icon">
         <img src="assets/images/bomb.png">
       </div>
-      <ul>
-        <li>Mobile devices are not supported by this website. because I couldn't get it to work.</li>
-        <br>
-        <li>Consider using a desktop device. don't torture yourself :')</li>
-      </ul>
-      <button id="close-button" class="command_button">Close</button>`
+      <div class="about">
+        Mobile devices are not supported by this website. because I couldn't get it to work.
+        <br><br>
+        Consider using a desktop device. don't torture yourself :')
+        <br><br>
+        If you insist, tap the button to get to my GitHub.
+      </div>
+      <button id="close-button" class="command_button">Go to GitHub</button>`
   })
 
   $('#close-button').click(function () {
-    window.close()
+    window.open('https://github.com/jkelol111')
   })
 } else {
   const windowLayouts = {
