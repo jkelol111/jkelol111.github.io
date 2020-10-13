@@ -14,15 +14,29 @@ class ClassicWM {
     $(`#${windowOptions.id}`).draggable({
       handle: 'h1.title'
     })
+
+    var that = this
+    this.focused[windowOptions.id] = false
+
+    $(`#${windowOptions.id} .title`).click(function () {
+      that.focusWindow(windowOptions.id)
+    })
+
+    $(`#${windowOptions.id} .inner`).click(function () {
+      that.focusWindow(windowOptions.id)
+    })
+
+    this.focusWindow(windowOptions.id)
   }
 
   focusWindow (windowID) {
-    this.focused[windowID] = true
     for (const win in this.focused) {
-      if (this.focused[win]) {
-        document.getElementById(windowID).style.zIndex = 3
+      if (win === windowID) {
+        $(`#${win}`).css('z-index', 3)
+        this.focused[win] = true
       } else {
-        document.getElementById(windowID).style.zIndex = 2
+        $(`#${win}`).css('z-index', 2)
+        this.focused[win] = false 
       }
     }
   }
