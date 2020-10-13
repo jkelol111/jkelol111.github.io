@@ -1,10 +1,14 @@
 class ClassicWM {
-  constructor () {
+  constructor (taskbar) {
+    this.windows = {}
     this.focused = {}
     this.minimized = {}
+    this.taskbar = taskbar
   }
 
   createWindow (windowOptions) {
+    this.windows[windowOptions.id] = windowOptions
+
     $('body').append($(`
       <div class="content" id="${windowOptions.id}">
         <h1 class="title">${windowOptions.title}</h1>
@@ -12,11 +16,14 @@ class ClassicWM {
       </div>`))
 
     $(`#${windowOptions.id}`).draggable({
-      handle: 'h1.title'
+      cursor: "grabbing",
+      handle: 'h1.title',
+      zIndex: 3
     })
 
     var that = this
     this.focused[windowOptions.id] = false
+    this.minimized[windowOptions.id] = false
 
     $(`#${windowOptions.id} .title`).click(function () {
       that.focusWindow(windowOptions.id)
@@ -27,6 +34,8 @@ class ClassicWM {
     })
 
     this.focusWindow(windowOptions.id)
+
+
   }
 
   focusWindow (windowID) {
@@ -42,11 +51,27 @@ class ClassicWM {
   }
 
   minimizeWindow (windowID) {
-
+    for (const win in this.minimized) {
+      if (win === windowID) {
+        this.minimized[win] = true
+        $(`#${win}`).addClass('visuallyhidden')
+      } else {
+        this.minimized[win] = false
+        $(`#${win}`).removeClass('visuallyhidden')
+      }
+    }
   }
 
   restoreWindow (windowID) {
-
+    for (const win in this.minimized) {
+      if (win === windowID) {
+        this.minimized[win] = false
+        $(`#${win}`).removeClass('visuallyhidden')
+      } else {
+        this.minimized[win] = true
+        $(`#${win}`).addClass('visuallyhidden')
+      }
+    }
   }
 
   destroyWindow (windowID) {

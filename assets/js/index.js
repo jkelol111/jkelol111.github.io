@@ -84,17 +84,37 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
   wm.createWindow(windowLayouts.terminal)
   const commandMetas = {
     help: {
-      description: "Displays help for commands, just like this.",
-      usage: "help [command]"
+      description: 'Displays help for commands, just like this.',
+      usage: 'help [command]'
     },
     hello: {
-      description: "A hello from me, to you :)",
-      usage: "hello [name]"
+      description: 'A hello from me, to you :)',
+      usage:'hello [name]'
     },
     whoami: {
-      description: "Who tf is jkelol111?",
-      usage: "whoami"
+      description: 'Who is this weird ass teenage guy?',
+      usage: 'whoami'
+    },
+    love: {
+      description: `If you're so inclined to know whether I'm in a relationship or not...`, 
+      usage: 'love'
+    },
+    mood: {
+      description: 'Wow, thanks stranger, you actually care! I love you.',
+      usage: 'mood'
+    },
+    rickroll: {
+      description: 'Literally what it is.',
+      usage: 'rickroll'
+    },
+    rolldice: {
+      description: 'Roll a dice!',
+      usage: 'rolldice [sides]'
     }
+  }
+
+  function rollADice(sides) {
+    return Math.floor(Math.random() * sides) + 1
   }
 
   $('#terminal').terminal({
@@ -102,8 +122,8 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
       if (command) {
         if (command in commandMetas) {
           this.echo(`Help for command '${command}':`)
-          this.echo(`Usage: ${commandMetas[command].usage}`)
           this.echo(`Description: ${commandMetas[command].description}`)
+          this.echo(`Usage: ${commandMetas[command].usage}`)
         } else {
           this.echo(`There is no help for command '${command}'. Are you sure it's the right command?`)
         }
@@ -125,6 +145,42 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
       this.echo('Hello there, thanks for asking, I am jkelol111, otherwise known by my real name Nam.')
       this.echo('')
       this.echo('To read more about me: https://github.com/jkelol111')
+    },
+    love: function () {
+      this.echo('Am I in a relationship now?')
+      this.echo('')
+      this.echo('Something tells me I will never be in one.')
+      this.echo('No one likes me.')
+      this.echo('')
+      this.echo(`I'd love to be proven wrong though :)`)
+      this.echo('')
+      this.echo('Definitely want to say all of this to someone: https://www.youtube.com/watch?v=XvuREbgYurM')
+    },
+    mood: function () {
+      this.echo('Right now, Nam is feeling like:')
+      switch (rollADice(4)) {
+        case 1:
+          this.echo('~ Feeling like shit, as usual. Fuck life.')
+          break
+        case 2:
+          this.echo('~ Maybe things are not so bad...')
+          break
+        case 3:
+          this.echo('~ Hmm surprisingly good today.')
+          break
+        case 4:
+          this.echo(`~ Crippling sadness and stress :(`)
+          break
+      }
+    },
+    rickroll: function () {
+      this.echo('Enable the popup when prompted!')
+      this.echo('')
+      window.open('https://www.youtube.com/watch?v=dPmZqsQNzGA')
+      this.echo(`Thee hath asked f'r t, i shalt blesseth thee with t!`)
+    },
+    rolldice: function (sides) {
+      this.echo(`The almightly dice God has decided on the number: ${rollADice(sides)}`)
     }
   }, {
     greetings: `Type 'help' to get a list of commands you could run.`,
