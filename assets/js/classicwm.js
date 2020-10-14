@@ -4,38 +4,82 @@ class ClassicWM {
     this.focused = {}
     this.minimized = {}
     this.taskbar = taskbar
+
+    $.fn.center = function() {
+      this.css({
+        'position': 'fixed',
+        'left': '50%',
+        'top': '50%'
+      });
+      this.css({
+        'margin-left': -this.outerWidth() / 2 + 'px',
+        'margin-top': -this.outerHeight() / 2 + 'px'
+      });
+
+      return this;
+    }
   }
 
   createWindow (windowOptions) {
-    this.windows[windowOptions.id] = windowOptions
+    if (!(windowOptions.id in this.windows)) {
+      this.windows[windowOptions.id] = windowOptions
 
-    $('body').append($(`
-      <div class="content" id="${windowOptions.id}">
-        <h1 class="title">${windowOptions.title}</h1>
-        <div class="inner">${windowOptions.inner}</div>
-      </div>`))
+      $('body').append($(`
+        <div class="content" id="${windowOptions.id}">
+          <h1 class="title">${windowOptions.title}</h1>
+          <div class="inner">${windowOptions.inner}</div>
+        </div>`))
 
-    $(`#${windowOptions.id}`).draggable({
-      cursor: "grabbing",
-      handle: 'h1.title',
-      zIndex: 3
-    })
+      var windowObject = $(`#${windowOptions.id}`)
 
-    var that = this
-    this.focused[windowOptions.id] = false
-    this.minimized[windowOptions.id] = false
+      if (windowOptions.width) {
+        windowObject.css('width', `${windowOptions.width}px`)
+      }
 
-    $(`#${windowOptions.id} .title`).click(function () {
-      that.focusWindow(windowOptions.id)
-    })
+      if (windowOptions.height) {
+        windowObject.css('height', `${windowOptions.height}px`)
+      }
 
-    $(`#${windowOptions.id} .inner`).click(function () {
-      that.focusWindow(windowOptions.id)
-    })
+      if (windowOptions.controls) {
+        if (windowOptions.controls.close) {
+          windowObject.append($(`
+            <div class="control-box close-box"><a class="control-box-inner"></a></div>
+          `))
+        }
+      }
 
-    this.focusWindow(windowOptions.id)
+      if (windowOptions.center) {
+        windowObject.center()
+      }
 
+      if (windowOptions.spawn) {
+        for (const spawnAnchors in windowOptions.spawn) {
+          windowObject.css(spawnAnchors, `${windowOptions.spawn[spawnAnchors]}px`)
+        }
+      }
 
+      var that = this
+      this.focused[windowOptions.id] = false
+      this.minimized[windowOptions.id] = false
+
+      $(`#${windowOptions.id} .title`).click(function () {
+        that.focusWindow(windowOptions.id)
+      })
+
+      $(`#${windowOptions.id} .inner`).click(function () {
+        that.focusWindow(windowOptions.id)
+      })
+
+      windowObject.draggable({
+        cursor: "grabbing",
+        handle: 'h1.title',
+        zIndex: 3
+      })
+
+      this.focusWindow(windowOptions.id)
+    } else {
+      throw new Error('Window already exists or something!')
+    }
   }
 
   focusWindow (windowID) {

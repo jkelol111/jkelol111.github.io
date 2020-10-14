@@ -61,6 +61,17 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
         <hr>
         <button id="paypal-button" class="command_button">PayPal me!</button>
         <button id="buymeacoffee-button" class="command_button">Or Buy Me a Coffee</button>`
+    }, 
+    rickroll: {
+      id: 'rickroll-window',
+      title: 'Rick Astley Stan Window',
+      width: 524,
+      height: 318,
+      center: true,
+      controls: {
+        close: true
+      },
+      inner: `<iframe width="512" height="288" src="https://www.youtube-nocookie.com/embed/dPmZqsQNzGA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
     }
   }
 
@@ -174,10 +185,12 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
       }
     },
     rickroll: function () {
-      this.echo('Enable the popup when prompted!')
-      this.echo('')
-      window.open('https://www.youtube.com/watch?v=dPmZqsQNzGA')
-      this.echo(`Thee hath asked f'r t, i shalt blesseth thee with t!`)
+      try {
+        wm.createWindow(windowLayouts.rickroll)
+        this.echo(`Thee hath asked f'r t, i shalt blesseth thee with t!`)
+      } catch (err) {
+        this.echo(`I know you have a crush on Rick Astley but chill - finish your current dose of Never Gonna Give You Up first!`)
+      }
     },
     rolldice: function (sides) {
       this.echo(`The almightly dice God has decided on the number: ${rollADice(sides)}`)
