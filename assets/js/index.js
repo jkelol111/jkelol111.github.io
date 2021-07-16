@@ -43,11 +43,9 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
           <img src="assets/images/jkelol111-pfp-32.jpg">
         </div>
         <div class="about">
-          Nam Thanh Nguyen (jkelol111)
+          Nam Thanh Nguyen
           <br>
-          a.k.a
-          <br>
-          Some mood swinging teenager?
+          @jkelol111
           <br><br>
           Take a trip down nostalgia lane with this terrible virtual Mac that is also
           somehow my 'homepage'. 
@@ -83,7 +81,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     window.open('https://twitter.com/jkelol111', '_blank')
   })
   $('#instagram-button').click(function () {
-    window.open('https://instagram.com/jkelol1cubed', '_blank')
+    window.open('https://instagram.com/jkelol_111', '_blank')
   })
   $('#paypal-button').click(function () {
     window.open('https://paypal.me/jkelol111', '_blank')
@@ -105,14 +103,6 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     whoami: {
       description: 'Who is this weird ass teenage guy?',
       usage: 'whoami'
-    },
-    love: {
-      description: `If you're so inclined to know whether I'm in a relationship or not...`, 
-      usage: 'love'
-    },
-    mood: {
-      description: 'Wow, thanks stranger, you actually care! I love you.',
-      usage: 'mood'
     },
     rickroll: {
       description: 'Literally what it is.',
@@ -156,33 +146,6 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
       this.echo('Hello there, thanks for asking, I am jkelol111, otherwise known by my real name Nam.')
       this.echo('')
       this.echo('To read more about me: https://github.com/jkelol111')
-    },
-    love: function () {
-      this.echo('Am I in a relationship now?')
-      this.echo('')
-      this.echo('Something tells me I will never be in one.')
-      this.echo('No one likes me.')
-      this.echo('')
-      this.echo(`I'd love to be proven wrong though :)`)
-      this.echo('')
-      this.echo('Definitely want to say all of this to someone: https://www.youtube.com/watch?v=XvuREbgYurM')
-    },
-    mood: function () {
-      this.echo('Right now, Nam is feeling like:')
-      switch (rollADice(4)) {
-        case 1:
-          this.echo('~ Feeling like shit, as usual. Fuck life.')
-          break
-        case 2:
-          this.echo('~ Maybe things are not so bad...')
-          break
-        case 3:
-          this.echo('~ Hmm surprisingly good today.')
-          break
-        case 4:
-          this.echo(`~ Crippling sadness and stress :(`)
-          break
-      }
     },
     rickroll: function () {
       try {
